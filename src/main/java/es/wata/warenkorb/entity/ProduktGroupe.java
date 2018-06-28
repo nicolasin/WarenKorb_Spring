@@ -26,6 +26,20 @@ public class ProduktGroupe {
 	@ManyToMany(mappedBy="groupe")
 	List<Produkt> produkte = new ArrayList<Produkt>();
 	
+	private Rabat rabat;
+	
+	public List<Produkt> getProdukte() {
+		return produkte;
+	}
+	public void setProdukte(List<Produkt> produkte) {
+		this.produkte = produkte;
+	}
+	public Rabat getRabat() {
+		return rabat;
+	}
+	public void setRabat(Rabat rabat) {
+		this.rabat = rabat;
+	}
 	public ProduktGroupe() {}
 	public Long getId() {
 		return id;

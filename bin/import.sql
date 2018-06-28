@@ -28,3 +28,20 @@ INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (3,1);
 INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (3,3);
 INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (4,1);
 INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (4,4);
+
+
+INSERT INTO RABAT (id,name, type, wert)values(1,'RabatJubilados', 'ABS', 15);
+INSERT INTO RABAT (id,name, type, wert)values(2,'RabatJOVEN', 'REL', 20);
+INSERT INTO RABAT (id,name, type, wert)values(3,'RabatTrabajadores', 'ABS', 10);
+INSERT INTO RABAT (id,name, type, wert)values(4,'20 PORCENT', 'REL', 20);
+INSERT INTO RABAT (id,name, type, wert)values(5,'15 PORCENT', 'REL', 15);
+INSERT INTO RABAT (id,name, type, wert)values(6,'10 PORCENT', 'REL', 10);
+INSERT INTO RABAT (id,name, type, wert)values(7,'20 EUROS', 'ABS', 20);
+INSERT INTO RABAT (id,name, type, wert)values(8,'15 EUROS', 'ABS', 15);
+INSERT INTO RABAT (id,name, type, wert)values(9,'10 EUROS', 'ABS', 10);
+INSERT INTO RABAT (id,name, type, wert)values(10,'30 EUROS', 'ABS', 30);
+INSERT INTO RABAT (id,name, type, wert)values(11,'40 EUROS', 'ABS', 40);
+INSERT INTO RABAT (id,name, type, wert)values(12,'40 PORCENT', 'REL', 40);
+INSERT INTO RABAT (id,name, type, wert)values(13,'30 PORCENT', 'REL', 30);
+
+

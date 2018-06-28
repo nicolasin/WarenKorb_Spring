@@ -27,6 +27,16 @@ public class Kunde implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private Rabat rabat;
+	public Rabat getRabat() {
+		return rabat;
+	}
+
+	public void setRabat(Rabat rabat) {
+		this.rabat = rabat;
+	}
+
 	@NotEmpty
 	private String name;
 	@NotEmpty
