@@ -2,8 +2,10 @@ package es.wata.warenkorb.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,50 +14,48 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="Kunde")
-public class Kunde implements Serializable{
+@Table(name = "Kunde")
+public class Kunde implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8640384290133152667L;
-	//ATRIBUTES
+	// ATRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Rabat rabat;
-	public Rabat getRabat() {
-		return rabat;
-	}
-
-	public void setRabat(Rabat rabat) {
-		this.rabat = rabat;
-	}
-
 	@NotEmpty
 	private String name;
 	@NotEmpty
 	private String nick;
 	@NotEmpty
 	private String password;
-	
 	@ManyToMany
-	@JoinTable(name = "warenkorb", joinColumns = {
-			@JoinColumn(name = "kunde_id") }, inverseJoinColumns = { @JoinColumn(name = "produkt_id") })
+	@JoinTable(name = "warenkorb", joinColumns = { @JoinColumn(name = "kunde_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "produkt_id") })
+	@JsonManagedReference
 	private List<Produkt> warenkorb = new ArrayList<Produkt>();
 
 	@ManyToOne
-	KundeGroupe groupes;
-	
-	//CONSTRUCTOR
-	public Kunde() {}
+	private Kundegruppe gruppe;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Rabatt rabatt;
 
-	//GETERES AND SETERS
+
+
+	// CONSTRUCTOR
+	public Kunde() {
+	}
+
+	// GETERES AND SETERS
 	public Long getId() {
 		return id;
 	}
@@ -87,12 +87,13 @@ public class Kunde implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public KundeGroupe getGroupes() {
-		return groupes;
+
+	public Kundegruppe getGruppe() {
+		return gruppe;
 	}
 
-	public void setGroupes(KundeGroupe groupes) {
-		this.groupes = groupes;
+	public void setGruppe(Kundegruppe gruppe) {
+		this.gruppe = gruppe;
 	}
 
 	public List<Produkt> getWarenkorb() {
@@ -101,5 +102,35 @@ public class Kunde implements Serializable{
 
 	public void setWarenkorb(List<Produkt> warenkorb) {
 		this.warenkorb = warenkorb;
+	}
+
+	public void addProduktToWarenkorb(Produkt produkt) {
+		warenkorb.add(produkt);
+	}
+
+	public void removeProduktVonWarenkorb(Produkt produkt) {
+		if (warenkorb.contains(produkt)) {
+			Iterator<Produkt> iter = warenkorb.iterator();
+			int countIndex = 0;
+			while (iter.hasNext()) {
+				if (iter.next().equals(produkt)) {
+					break;
+				}
+				countIndex++;
+			}
+			warenkorb.remove(countIndex);
+		}
+	}
+
+	public void entlerenWarenkorb() {
+		warenkorb.clear();
+
+	}
+	public Rabatt getRabatt() {
+		return rabatt;
+	}
+
+	public void setRabatt(Rabatt rabatt) {
+		this.rabatt = rabatt;
 	}
 }

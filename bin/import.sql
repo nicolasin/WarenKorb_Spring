@@ -1,47 +1,57 @@
-INSERT INTO KUNDE_GROUPE (name) values ('Jubilados');
-INSERT INTO KUNDE_GROUPE (name) values ('Joven');
-INSERT INTO KUNDE_GROUPE (name) values ('Trabajadores');
 
-INSERT INTO KUNDE (name, nick, password, groupes_id) values ('Nicolas','nico','1234567', 1);
-INSERT INTO KUNDE (name, nick, password, groupes_id) values ('Ana','ana','1234567', 2);
-INSERT INTO KUNDE (name, nick, password, groupes_id) values ('Javi','javi','1234567', 3);
-INSERT INTO KUNDE (name, nick, password, groupes_id) values ('JaviAdvani','advi','1234567', 3);
+INSERT INTO RABATT (id,name, type, wert)values(1,'RabatJubilados', 'ABS', 15);
+INSERT INTO RABATT (id,name, type, wert)values(2,'RabatJOVEN', 'REL', 20);
+INSERT INTO RABATT (id,name, type, wert)values(3,'RabatTrabajadores', 'ABS', 10);
+INSERT INTO RABATT (id,name, type, wert)values(4,'20 PORCENT', 'REL', 20);
+INSERT INTO RABATT (id,name, type, wert)values(5,'15 PORCENT', 'REL', 15);
+INSERT INTO RABATT (id,name, type, wert)values(6,'10 PORCENT', 'REL', 10);
+INSERT INTO RABATT (id,name, type, wert)values(7,'20 EUROS', 'ABS', 20);
+INSERT INTO RABATT (id,name, type, wert)values(8,'15 EUROS', 'ABS', 15);
+INSERT INTO RABATT (id,name, type, wert)values(9,'10 EUROS', 'ABS', 10);
+INSERT INTO RABATT (id,name, type, wert)values(10,'30 EUROS', 'ABS', 30);
+INSERT INTO RABATT (id,name, type, wert)values(11,'40 EUROS', 'ABS', 40);
+INSERT INTO RABATT (id,name, type, wert)values(12,'40 PORCENT', 'REL', 40);
+INSERT INTO RABATT (id,name, type, wert)values(13,'30 PORCENT', 'REL', 30);
+
+INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Jubilados', 1);
+INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Joven', 2);
+INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Trabajadores', 3);
+INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('OTROMAS', 1);
+
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Nicolas','nico','1234567', 1, 7);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Ana','ana','1234567', 2 ,8);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Javi','javi','1234567', 3, 9);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID) values ('JaviAdvani','advi','1234567', 3);
 INSERT INTO KUNDE (name, nick, password) values ('Juan','juan','1234567');
 
-INSERT INTO PRODUKT (name, precio) values ('Camiseta Spain', 65);
-INSERT INTO PRODUKT (name, precio) values ('Camiseta Alemania', 65);
-INSERT INTO PRODUKT (name, precio) values ('Zapatillas Nike', 40);
-INSERT INTO PRODUKT (name, precio) values ('Botas de Agua', 15);
-INSERT INTO PRODUKT (name, precio) values ('Cantimplora', 10);
+INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Spain', 65, 6);
+INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Alemania', 65, 6);
+INSERT INTO PRODUKT (name, preis, Rabatt_ID, Rabatt_ID) values ('Zapatillas Nike', 40, 5);
+INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Botas de Agua', 15, 4);
+INSERT INTO PRODUKT (name, preis) values ('Cantimplora', 10);
 
 
-INSERT INTO PRODUKT_GROUPE(name) values('ZAPATO');
-INSERT INTO PRODUKT_GROUPE(name) values('ROPA');
-INSERT INTO PRODUKT_GROUPE(name) values('DEPORTE');
-INSERT INTO PRODUKT_GROUPE(name) values('AVENTURA');
+INSERT INTO PRODUKTGRUPPE (name, Rabatt_ID) values('ZAPATO', 4);
+INSERT INTO PRODUKTGRUPPE (name, Rabatt_ID) values('ROPA', 5);
+INSERT INTO PRODUKTGRUPPE (name, Rabatt_ID) values('DEPORTE', 6);
+INSERT INTO PRODUKTGRUPPE (name) values('AVENTURA');
 
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (1,2);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (1,3);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (2,2);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (2,3);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (3,1);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (3,3);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (4,1);
-INSERT INTO PRODUKT_PRODUKT_GROUPE(PRODUKTE_ID, GROUPE_ID) VALUES (4,4);
-
-
-INSERT INTO RABAT (id,name, type, wert)values(1,'RabatJubilados', 'ABS', 15);
-INSERT INTO RABAT (id,name, type, wert)values(2,'RabatJOVEN', 'REL', 20);
-INSERT INTO RABAT (id,name, type, wert)values(3,'RabatTrabajadores', 'ABS', 10);
-INSERT INTO RABAT (id,name, type, wert)values(4,'20 PORCENT', 'REL', 20);
-INSERT INTO RABAT (id,name, type, wert)values(5,'15 PORCENT', 'REL', 15);
-INSERT INTO RABAT (id,name, type, wert)values(6,'10 PORCENT', 'REL', 10);
-INSERT INTO RABAT (id,name, type, wert)values(7,'20 EUROS', 'ABS', 20);
-INSERT INTO RABAT (id,name, type, wert)values(8,'15 EUROS', 'ABS', 15);
-INSERT INTO RABAT (id,name, type, wert)values(9,'10 EUROS', 'ABS', 10);
-INSERT INTO RABAT (id,name, type, wert)values(10,'30 EUROS', 'ABS', 30);
-INSERT INTO RABAT (id,name, type, wert)values(11,'40 EUROS', 'ABS', 40);
-INSERT INTO RABAT (id,name, type, wert)values(12,'40 PORCENT', 'REL', 40);
-INSERT INTO RABAT (id,name, type, wert)values(13,'30 PORCENT', 'REL', 30);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (1,2);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (1,3);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (2,2);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (2,3);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (3,1);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (3,3);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (4,1);
+INSERT INTO PRODUKT_PRODUKTGRUPPE (PRODUKT_ID, GRUPPE_ID) VALUES (4,4);
 
 
+
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(1, 1);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(1, 1);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(1, 2);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(1, 3);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(2, 1);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(2, 3);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(3, 2);
+INSERT INTO WARENKORB(KUNDE_ID, PRODUKT_ID)values(4, 5);
