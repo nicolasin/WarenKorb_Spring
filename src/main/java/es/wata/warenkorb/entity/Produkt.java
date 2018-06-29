@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "produkt")
 public class Produkt implements Serializable {
@@ -23,7 +25,11 @@ public class Produkt implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7959251865088967062L;
+	private static final long serialVersionUID = -8988466953118227910L;
+	/**
+	 * 
+	 */
+	
 	// ATRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +42,11 @@ public class Produkt implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "Produkt_ProduktGroupe")
+	@JsonIgnore
 	private Set<ProduktGroupe> groupe = new HashSet<ProduktGroupe>();
-
+	
 	@ManyToMany(mappedBy = "warenkorb")
+	@JsonIgnore
 	private List<Kunde> kunden = new ArrayList<Kunde>();
 
 	// CONSTRUCT
