@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.wata.warenkorb.entity.Kunde;
 import es.wata.warenkorb.entity.WarenkorbToJSON;
-import es.wata.warenkorb.exceptions.ServiceException;
 import es.wata.warenkorb.helperClasses.ApiResponse;
 import es.wata.warenkorb.services.interfaces.KundeInterfaceService;
 

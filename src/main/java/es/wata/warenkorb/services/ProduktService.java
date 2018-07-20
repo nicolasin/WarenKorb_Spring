@@ -25,6 +25,7 @@ public class ProduktService implements ProduktServiceInterface {
 	@Transactional
 	@Override
 	public List<Produkt> getListProdukt()throws ServiceException{
+		LOG.info("GET LIST PRODUKT");
 		return (List<Produkt>)produktDAO.findAll();
 	}
 	@Transactional
