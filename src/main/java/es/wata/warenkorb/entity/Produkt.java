@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -45,7 +45,7 @@ public class Produkt implements Serializable {
 	private Set<Produktgruppe> gruppe = new HashSet<Produktgruppe>();
 
 	@ManyToMany(mappedBy = "warenkorb")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Kunde> kunden = new ArrayList<Kunde>();
 
 	@OneToOne(cascade = CascadeType.ALL)

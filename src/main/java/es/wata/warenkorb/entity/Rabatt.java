@@ -1,5 +1,7 @@
 package es.wata.warenkorb.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import java.io.Serializable;
 
 @Entity
 @Table(name="Rabatt")
@@ -59,6 +59,19 @@ public class Rabatt implements Serializable{
 	}
 	public void setWert(double wert) {
 		this.wert = wert;
+	}
+	
+	public double rabattAnwenden(double preis) {
+		if(this.type == typeRabat.ABS) {
+			return wert;
+		}else {
+			return preis *(wert/100);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return name + "," + type.toString() + ", " + wert ;
 	}
 	
 	

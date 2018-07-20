@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Kunde")
@@ -41,7 +41,7 @@ public class Kunde implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "warenkorb", joinColumns = { @JoinColumn(name = "kunde_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "produkt_id") })
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Produkt> warenkorb = new ArrayList<Produkt>();
 
 	@ManyToOne
@@ -53,6 +53,13 @@ public class Kunde implements Serializable {
 
 	// CONSTRUCTOR
 	public Kunde() {
+	}
+	public Kunde(String name, String nick, String password) {
+		this.name = name;
+		this.nick = nick;
+		this.password = password;
+		this.rabatt = null;
+		this.gruppe = null;
 	}
 
 	// GETERES AND SETERS
