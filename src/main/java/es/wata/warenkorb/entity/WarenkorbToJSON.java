@@ -39,21 +39,21 @@ public class WarenkorbToJSON {
 		if (detail.isEmpty()) {
 			totalPreis = 0;
 		}else {
-			totalPreis = detail.stream().mapToDouble(x -> x.Anzahl * x.preisNachRabat).sum();
-			footer.Gesamt = totalPreis;
-			footer.Gesamt -= kunde.getRabatt().rabattAnwenden(totalPreis);
-			footer.Gesamt -= kunde.getGruppe().getRabatt().rabattAnwenden(totalPreis);
-			footer.Gesamt = Math.max(0, footer.Gesamt);
+			totalPreis = detail.stream().mapToDouble(x -> x.anzahl * x.preisNachRabatt).sum();
+			footer.gesamt = totalPreis;
+			footer.gesamt -= kunde.getRabatt().rabattAnwenden(totalPreis);
+			footer.gesamt -= kunde.getGruppe().getRabatt().rabattAnwenden(totalPreis);
+			footer.gesamt = Math.max(0, footer.gesamt);
 		}
 
 	}
 
 	private void addRabatNamesToFooter(Kunde kunde) {
 		if (kunde.getRabatt() != null) {
-			footer.Rabatt.add(kunde.getRabatt().toString());
+			footer.rabatt.add(kunde.getRabatt().toString());
 		}
 		if (kunde.getGruppe() != null && kunde.getGruppe().getRabatt() != null) {
-			footer.Rabatt.add(kunde.getGruppe().getRabatt().toString());
+			footer.rabatt.add(kunde.getGruppe().getRabatt().toString());
 		}
 
 	}
@@ -64,10 +64,10 @@ public class WarenkorbToJSON {
 				if (detail.stream().filter(x -> x.name.equals(produkt.getName())).count() == 0) {
 					Detail dt = new Detail();
 					dt.name = produkt.getName();
-					dt.Anzahl = kunde.getWarenkorb().stream().filter(x -> x.equals(produkt)).count();
+					dt.anzahl = kunde.getWarenkorb().stream().filter(x -> x.equals(produkt)).count();
 					dt.preis = produkt.getPreis();
-					addRabatt(dt.rabat, produkt);
-					dt.preisNachRabat = preisNachRabat(produkt);
+					addRabatt(dt.rabatt, produkt);
+					dt.preisNachRabatt = preisNachRabat(produkt);
 					detail.add(dt);
 
 				}
@@ -134,15 +134,15 @@ class Header {
 }
 
 class Detail {
-	public Long Anzahl;
+	public Long anzahl;
 	public String name;
 	public double preis;
-	public List<String> rabat = new ArrayList<String>();
-	public double preisNachRabat;
+	public List<String> rabatt = new ArrayList<String>();
+	public double preisNachRabatt;
 
 }
 
 class Footer {
-	public Set<String> Rabatt = new HashSet<String>();
-	public double Gesamt;
+	public Set<String> rabatt = new HashSet<String>();
+	public double gesamt;
 }

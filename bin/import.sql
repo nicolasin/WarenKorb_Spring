@@ -26,7 +26,7 @@ INSERT INTO KUNDE (name, nick, password) values ('Juan','juan','1234567');
 
 INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Spain', 65, 6);
 INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Alemania', 65, 6);
-INSERT INTO PRODUKT (name, preis, Rabatt_ID, Rabatt_ID) values ('Zapatillas Nike', 40, 5);
+INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Zapatillas Nike', 40, 5);
 INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Botas de Agua', 15, 4);
 INSERT INTO PRODUKT (name, preis) values ('Cantimplora', 10);
 

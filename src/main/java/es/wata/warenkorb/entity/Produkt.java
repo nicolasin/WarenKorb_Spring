@@ -55,6 +55,12 @@ public class Produkt implements Serializable {
 	public Produkt() {
 	}
 
+	public Produkt(String name, double preis) {
+		this.name = name;
+		this.preis = preis;
+		this.rabatt = null;
+	}
+
 	// GETERS AND SETERS
 	public Long getId() {
 		return id;

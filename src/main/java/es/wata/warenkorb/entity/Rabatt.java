@@ -9,17 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Rabatt")
+@Table(name="rabatt")
 public class Rabatt implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4089578288262084195L;
-	private enum typeRabat {ABS, REL};
+	public enum typeRabatt {ABS, REL};
 	//ATRIBUTE
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +27,18 @@ public class Rabatt implements Serializable{
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
-	private typeRabat type;
-	@NotEmpty
-	private double wert;
+	private typeRabatt type;
+	@NotNull
+	private Double wert;
 	//CONSTRUCTORS
 	public Rabatt() {}
 	
+	public Rabatt(String name, double wert, typeRabatt typeRabatt) {
+		this.name = name;
+		this.wert = wert;
+		this.type = typeRabatt;
+	}
+
 	//GET AND SETERS
 	public Long getId() {
 		return Id;
@@ -48,10 +53,10 @@ public class Rabatt implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public typeRabat getType() {
+	public typeRabatt getType() {
 		return type;
 	}
-	public void setType(typeRabat type) {
+	public void setType(typeRabatt type) {
 		this.type = type;
 	}
 	public double getWert() {
@@ -62,7 +67,7 @@ public class Rabatt implements Serializable{
 	}
 	
 	public double rabattAnwenden(double preis) {
-		if(this.type == typeRabat.ABS) {
+		if(this.type == typeRabatt.ABS) {
 			return wert;
 		}else {
 			return preis *(wert/100);
@@ -71,7 +76,7 @@ public class Rabatt implements Serializable{
 
 	@Override
 	public String toString() {
-		return name + "," + type.toString() + ", " + wert ;
+		return Id+" "+name + "," + type.toString() + ", " + wert ;
 	}
 	
 	

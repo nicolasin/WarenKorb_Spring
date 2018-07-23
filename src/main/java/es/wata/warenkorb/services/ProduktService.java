@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import es.wata.warenkorb.daos.ProduktDAO;
@@ -14,6 +15,7 @@ import es.wata.warenkorb.daos.ProduktgruppeDAO;
 import es.wata.warenkorb.entity.Produkt;
 import es.wata.warenkorb.entity.Produktgruppe;
 import es.wata.warenkorb.exceptions.ServiceException;
+import es.wata.warenkorb.helperClasses.ApiResponse;
 import es.wata.warenkorb.services.interfaces.ProduktServiceInterface;
 @Service
 public class ProduktService implements ProduktServiceInterface {
@@ -22,6 +24,8 @@ public class ProduktService implements ProduktServiceInterface {
 	private ProduktDAO produktDAO;
 	@Autowired
 	ProduktgruppeDAO produktGruppeDAO;
+	
+	//PRODUKT
 	@Transactional
 	@Override
 	public List<Produkt> getListProdukt()throws ServiceException{
@@ -31,17 +35,55 @@ public class ProduktService implements ProduktServiceInterface {
 	@Transactional
 	@Override
 	public Produkt	getProduktById(Long id)throws ServiceException {
+		existException(id);
 		return produktDAO.findOne(id);
 	}
+	
+	@Override
+	public void addProdukt(String name, double preis) throws ServiceException {
+		Produkt produkt = new Produkt(name, preis);
+		produktDAO.save(produkt);	
+	}
+	@Override
+	public void deleteProduktById(Long id) throws ServiceException {
+		existException(id);
+		produktDAO.delete(id);
+		
+	}
+	private void existException(Long id)throws ServiceException {
+		if(!produktDAO.exists(id)) {
+			throw new ServiceException(new ApiResponse("produkt NOT FOUND", HttpStatus.NOT_FOUND));
+		}
+	}
+	
+	
+	//CATEGORIAS
 	@Transactional
 	@Override
-	public List<Produktgruppe> getAllGroups()throws ServiceException{
+	public List<Produktgruppe> getAllCategorie()throws ServiceException{
 		return (List<Produktgruppe>) produktGruppeDAO.findAll();
 	}
 	@Transactional
 	@Override
-	public Produktgruppe produktgrupeByID(Long id)throws ServiceException {
-		
+	public Produktgruppe categorieByID(Long id)throws ServiceException {
+		if(!produktGruppeDAO.exists(id)) {
+			throw new ServiceException(new ApiResponse("Categorie NOT FOUND", HttpStatus.NOT_FOUND));
+		}
 		return produktGruppeDAO.findOne(id);
+	}
+	@Transactional
+	@Override
+	public void addCategorie(String name)throws ServiceException {
+		Produktgruppe produktgruppe = new Produktgruppe();
+		produktgruppe.setName(name);
+		produktGruppeDAO.save(produktgruppe);
+	}
+	@Transactional
+	@Override
+	public void removeCategorie(Long id)throws ServiceException {
+		if(!produktGruppeDAO.exists(id)) {
+			throw new ServiceException(new ApiResponse("Categorie NOT FOUND", HttpStatus.NOT_FOUND));
+		}
+		produktGruppeDAO.delete(id);
 	}
 }
