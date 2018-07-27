@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -27,6 +29,7 @@ public class Kunde implements Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = -8640384290133152667L;
 	// ATRIBUTES
 	@Id
@@ -37,7 +40,10 @@ public class Kunde implements Serializable {
 	@NotEmpty
 	private String nick;
 	@NotEmpty
+	@JsonIgnore
 	private String password;
+	private String email;
+
 	@ManyToMany
 	@JoinTable(name = "warenkorb", joinColumns = { @JoinColumn(name = "kunde_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "produkt_id") })
@@ -49,20 +55,37 @@ public class Kunde implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Rabatt rabatt;
 
-
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@NotNull
+	Role role;
 
 	// CONSTRUCTOR
 	public Kunde() {
 	}
-	public Kunde(String name, String nick, String password) {
+	public Kunde(String name, String nick, String password, String email) {
 		this.name = name;
 		this.nick = nick;
 		this.password = password;
 		this.rabatt = null;
 		this.gruppe = null;
+		this.email = email;
 	}
 
 	// GETERES AND SETERS
+	public String getEmail() {
+		return email;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}

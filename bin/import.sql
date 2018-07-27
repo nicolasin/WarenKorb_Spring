@@ -18,11 +18,16 @@ INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Joven', 2);
 INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Trabajadores', 3);
 INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('OTROMAS', 1);
 
-INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Nicolas','nico','1234567', 1, 7);
-INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Ana','ana','1234567', 2 ,8);
-INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID) values ('Javi','javi','1234567', 3, 9);
-INSERT INTO KUNDE (name, nick, password, GRUPPE_ID) values ('JaviAdvani','advi','1234567', 3);
-INSERT INTO KUNDE (name, nick, password) values ('Juan','juan','1234567');
+INSERT INTO ROLE (name) values ('ADMIN');
+INSERT INTO ROLE (name) values ('USER');
+
+
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email, ROLE_ID) values ('Nicolas','nico','1234567', 1, 7,  'nicomartos@msn.com',1);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email, ROLE_ID) values ('Ana','ana','1234567', 2 ,8, 'nicomarto13s@msn.com',2);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email, ROLE_ID) values ('Javi','javi','1234567', 3, 9, 'nicomar132tos@msn.com',2);
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, email, ROLE_ID) values ('JaviAdvani','advi','1234567', 3, 'nicomarto1s@msn.com',2);
+INSERT INTO KUNDE (name, nick, password, email, ROLE_ID) values ('Juan','juan','1234567','nicomartos7@msn.com',2);
+
 
 INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Spain', 65, 6);
 INSERT INTO PRODUKT (name, preis, Rabatt_ID) values ('Camiseta Alemania', 65, 6);

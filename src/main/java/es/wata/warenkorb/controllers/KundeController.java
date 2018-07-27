@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,46 +33,63 @@ public class KundeController {
 		return kunden;
 	}
 
+	@PostMapping("")
+	public void savekunde(@RequestBody Kunde kunde) {
+		serviceKunde.save(kunde);
+		
+	}
+
 	@GetMapping("/{id}")
 	public Kunde showKundeById(@PathVariable Long id) {
 		Kunde kunde = null;
 		kunde = serviceKunde.getById(id);
 		return kunde;
 	}
-	@PostMapping("")
-	public ResponseEntity<ApiResponse> addNeuKunde(@RequestParam("name")String name, @RequestParam("nick")String nick, @RequestParam("password") String password) {
-		serviceKunde.addNeuKunde(name, nick, password);
-		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("Succesfull to create Kunde",HttpStatus.CREATED));
-		
+
+	@PostMapping("/addKunde")
+	public ResponseEntity<ApiResponse> addNeuKunde(@RequestParam("name") String name, @RequestParam("nick") String nick,
+			@RequestParam("password") String password, @RequestParam("email") String email) {
+		serviceKunde.addNeuKunde(name, nick, password, email);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(new ApiResponse("Succesfull to create Kunde", HttpStatus.CREATED));
+
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiResponse> removeKunde(@PathVariable("id")Long idKunde) {
+	public ResponseEntity<ApiResponse> removeKunde(@PathVariable("id") Long idKunde) {
 		serviceKunde.deleteKunde(idKunde);
-		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("Succesfull to Delete Kunde",HttpStatus.OK));
-		
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(new ApiResponse("Succesfull to Delete Kunde", HttpStatus.OK));
+
 	}
+
 	@GetMapping("/{id}/warenkorb")
-	public WarenkorbToJSON getWarenKorb(@PathVariable("id")Long id) {
+	public WarenkorbToJSON getWarenKorb(@PathVariable("id") Long id) {
 		Kunde kunde = serviceKunde.getById(id);
 		WarenkorbToJSON wtj = new WarenkorbToJSON(kunde);
 		return wtj;
 	}
-	
+
 	@PutMapping("/{id}/warenkorb/{idProdukt}")
-	public ResponseEntity<ApiResponse> addProduktToWarenKorb(@PathVariable("id") Long id, @PathVariable("idProdukt") Long idProdukt) {
+	public ResponseEntity<ApiResponse> addProduktToWarenKorb(@PathVariable("id") Long id,
+			@PathVariable("idProdukt") Long idProdukt) {
 		serviceKunde.addProduktToKunde(id, idProdukt);
-		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Succesfull to insert produkt in warenkorb",HttpStatus.OK));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ApiResponse("Succesfull to insert produkt in warenkorb", HttpStatus.OK));
 	}
 
 	@DeleteMapping("/{id}/warenkorb/{idProdukt}")
-	public ResponseEntity<ApiResponse> removeProduktToWarenKorb(@PathVariable("id") Long id, @PathVariable("idProdukt") Long idProdukt) {
+	public ResponseEntity<ApiResponse> removeProduktToWarenKorb(@PathVariable("id") Long id,
+			@PathVariable("idProdukt") Long idProdukt) {
 		serviceKunde.removeProduktToKunde(id, idProdukt);
-		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Succesfull remove produkt in warenkorb",HttpStatus.OK));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ApiResponse("Succesfull remove produkt in warenkorb", HttpStatus.OK));
 	}
 
 	@DeleteMapping("/{id}/warenkorb/entleren")
 	public ResponseEntity<ApiResponse> entlerenWarenKorb(@PathVariable("id") Long id) {
 		serviceKunde.entlerenWarenkorb(id);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponse("Succesfull to warenkorb entleren",HttpStatus.ACCEPTED));
+		return ResponseEntity.status(HttpStatus.ACCEPTED)
+				.body(new ApiResponse("Succesfull to warenkorb entleren", HttpStatus.ACCEPTED));
 	}
 }

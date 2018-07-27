@@ -12,7 +12,8 @@ public interface KundeInterfaceService {
 	public void addProduktToKunde(Long id, Long idProdukt)throws ServiceException;
 	public void removeProduktToKunde(Long id, Long idProdukt)throws ServiceException;
 	public void entlerenWarenkorb(Long id)throws ServiceException;
-	public void addNeuKunde(String name, String nick, String password) throws ServiceException ;
+	public void addNeuKunde(String name, String nick, String password, String email) throws ServiceException ;
 	public void deleteKunde(Long idKunde)throws ServiceException;
+	public void save(Kunde kunde)throws ServiceException;
 	
 }

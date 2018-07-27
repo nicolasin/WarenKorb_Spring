@@ -36,17 +36,20 @@ public class ProduktService implements ProduktServiceInterface {
 	@Override
 	public Produkt	getProduktById(Long id)throws ServiceException {
 		existException(id);
+		LOG.info("GET PRODUKT ["+id+"]");
 		return produktDAO.findOne(id);
 	}
 	
 	@Override
 	public void addProdukt(String name, double preis) throws ServiceException {
 		Produkt produkt = new Produkt(name, preis);
+		LOG.info("ADD NEU PRODUKT ["+produkt.getName()+"]");
 		produktDAO.save(produkt);	
 	}
 	@Override
 	public void deleteProduktById(Long id) throws ServiceException {
 		existException(id);
+		LOG.info("DELETE PRODUKT ["+id+"]");
 		produktDAO.delete(id);
 		
 	}
@@ -61,14 +64,17 @@ public class ProduktService implements ProduktServiceInterface {
 	@Transactional
 	@Override
 	public List<Produktgruppe> getAllCategorie()throws ServiceException{
+		LOG.info("GET ALL CATEGORIES");
 		return (List<Produktgruppe>) produktGruppeDAO.findAll();
 	}
 	@Transactional
 	@Override
 	public Produktgruppe categorieByID(Long id)throws ServiceException {
+		
 		if(!produktGruppeDAO.exists(id)) {
 			throw new ServiceException(new ApiResponse("Categorie NOT FOUND", HttpStatus.NOT_FOUND));
 		}
+		LOG.info("GET CATEGORIE ["+id+"]");
 		return produktGruppeDAO.findOne(id);
 	}
 	@Transactional
@@ -76,6 +82,7 @@ public class ProduktService implements ProduktServiceInterface {
 	public void addCategorie(String name)throws ServiceException {
 		Produktgruppe produktgruppe = new Produktgruppe();
 		produktgruppe.setName(name);
+		LOG.info("ADD NEW CATEGORIE ["+produktgruppe.getName()+"]");
 		produktGruppeDAO.save(produktgruppe);
 	}
 	@Transactional
@@ -84,6 +91,7 @@ public class ProduktService implements ProduktServiceInterface {
 		if(!produktGruppeDAO.exists(id)) {
 			throw new ServiceException(new ApiResponse("Categorie NOT FOUND", HttpStatus.NOT_FOUND));
 		}
+		LOG.info("REMOVE CATEGORIE ["+id+"]");
 		produktGruppeDAO.delete(id);
 	}
 }

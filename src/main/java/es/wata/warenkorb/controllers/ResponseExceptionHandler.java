@@ -14,8 +14,8 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
 
-	protected ResponseEntity<String> genericHandler(Exception e) {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error 505 in the server: "+e.getMessage());
+	protected ResponseEntity<ApiResponse> genericHandler(Exception e) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Error in the server: "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	@ExceptionHandler(ServiceException.class)

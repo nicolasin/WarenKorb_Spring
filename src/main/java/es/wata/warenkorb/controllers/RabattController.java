@@ -43,7 +43,7 @@ public class RabattController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiResponse> deleteRabatt(@RequestParam("id")Long id) {
+	public ResponseEntity<ApiResponse> deleteRabatt(@PathVariable("id")Long id) {
 		rabattServices.deleteRabatt(id);
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Sucefull delete", HttpStatus.OK));
 	}
