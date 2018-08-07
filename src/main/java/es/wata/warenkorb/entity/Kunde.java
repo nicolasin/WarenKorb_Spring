@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,9 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,21 +27,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "Kunde")
 public class Kunde implements Serializable {
-	/**
-	 * 
-	 */
-	
+
 	private static final long serialVersionUID = -8640384290133152667L;
 	// ATRIBUTES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty
+
+	@Column(length = 30, unique = true)
 	private String name;
 	@NotEmpty
 	private String nick;
 	@NotEmpty
 	@JsonIgnore
+	@Column(length = 60)
 	private String password;
 	private String email;
 
@@ -55,13 +55,23 @@ public class Kunde implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Rabatt rabatt;
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@NotNull
-	Role role;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "kunde_id")
+	private List<Role> roles;
+	
+	private Boolean enabled;
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	// CONSTRUCTOR
 	public Kunde() {
 	}
+
 	public Kunde(String name, String nick, String password, String email) {
 		this.name = name;
 		this.nick = nick;
@@ -75,13 +85,15 @@ public class Kunde implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	
-	public Role getRole() {
-		return role;
+
+	public List<Role> getRoles() {
+		return roles;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -156,6 +168,7 @@ public class Kunde implements Serializable {
 		warenkorb.clear();
 
 	}
+
 	public Rabatt getRabatt() {
 		return rabatt;
 	}
