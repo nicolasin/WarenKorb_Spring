@@ -19,7 +19,7 @@ INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('Trabajadores', 3);
 INSERT INTO KUNDEGRUPPE (name, Rabatt_ID) values ('OTROMAS', 1);
 
 
-INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email) values ('Nicolas','nico','$2a$10$RJ6WC9VxOu6fI8..dt8qd.UkPHmml/0Edvgtflm.r3qv9cM.BOe3K', 1, 7,  'nicomartos@msn.com');
+INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email) values ('Nicolas','nico','$2a$10$nJ/TVXDf9p/AlDBOEWTT9OVID4Qj4/JxyyUIz81MLKwPIBePs8ZwG', 1, 7,  'nicomartos@msn.com');
 INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email) values ('Ana','ana','$2a$10$Zwho.ECEH5nXduu6wqzi5.HYOdN4P9ipAd5oNurwoQRUukpLuWnAi', 2 ,8, 'nicomarto13s@msn.com');
 INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, Rabatt_ID, email) values ('Javi','javi','$2a$10$MoGSiDFbqtaksV2sKJSUE.Gwra8.Vfv40BThxyI6YNmNt3GyXj8de', 3, 9, 'nicomar132tos@msn.com');
 INSERT INTO KUNDE (name, nick, password, GRUPPE_ID, email) values ('JaviAdvani','advi','$2a$10$LNSoYJI4BXQe0g97JTSOduPMD/NUcz/957BpD23Lk/4IeJ9KIRbJ2', 3, 'nicomarto1s@msn.com');

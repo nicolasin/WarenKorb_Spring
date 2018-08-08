@@ -55,7 +55,7 @@ public class Kunde implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Rabatt rabatt;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "kunde_id")
 	private List<Role> roles;
 	
